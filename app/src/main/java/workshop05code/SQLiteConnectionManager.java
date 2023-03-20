@@ -66,10 +66,12 @@ public class SQLiteConnectionManager {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
-
+                 
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+           // System.out.println(e.getMessage());
+            logger.log(level.SEVERE, e.getMessage());
+
         }
     }
 
@@ -88,8 +90,9 @@ public class SQLiteConnectionManager {
                     return true;
                 }
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return false;
+                //System.out.println(e.getMessage());
+               // return false;
+               logger.log(level.WARNING, e.getMessage());
             }
         }
         return false;
@@ -113,8 +116,10 @@ public class SQLiteConnectionManager {
                 return true;
 
             } catch (SQLException e) {
-                System.out.println(e.getMessage());
-                return false;
+               // System.out.println(e.getMessage());
+               // return false;
+               logger.log(level.SEVERE, e.getMessage());
+
             }
         }
     }
@@ -131,9 +136,12 @@ public class SQLiteConnectionManager {
 
         try (Connection conn = DriverManager.getConnection(databaseURL);
                 PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            pstmt.setInt(1,id);
+            pstmst.setString(2,word)
             pstmt.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            //System.out.println(e.getMessage());
+            logger.log(level.SEVERE, e.getMessage());
         }
 
     }
@@ -159,8 +167,8 @@ public class SQLiteConnectionManager {
             return false;
 
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            return false;
+            // System.out.println(e.getMessage());
+            logger.log(level.WARNING, e.getMessage());
         }
 
     }
