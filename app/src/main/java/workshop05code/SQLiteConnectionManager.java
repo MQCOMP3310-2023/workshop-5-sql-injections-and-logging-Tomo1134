@@ -161,7 +161,7 @@ public class SQLiteConnectionManager {
             ResultSet resultRows = stmt.executeQuery();
             if (resultRows.next()) {
                 int result = resultRows.getInt("total");
-                return (result >= 1);
+                return (result >= 1); 
             }
 
             return false;
